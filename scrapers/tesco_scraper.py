@@ -1,36 +1,31 @@
-import requests
-from bs4 import BeautifulSoup
-import time
+# import requests
+# from bs4 import BeautifulSoup
+# import time
 
+# URL = "https://www.tesco.com/groceries/en-GB/shop/bakery/all"
 
-def get_urls_from_sitemap(sitemap_url):
-    # Fetch the sitemap content
-    response = requests.get(sitemap_url)
-    response.raise_for_status()
-    
-    # Parse the sitemap XML
-    soup = BeautifulSoup(response.content, 'xml')
-    urls = [loc.text for loc in soup.find_all('loc')]
-    
-    return urls
+# headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+# }
 
-def download_data_from_urls(urls, download_path, delay=2):
-    for idx, url in enumerate(urls, start=1):
-        response = requests.get(url)
-        response.raise_for_status()
-        
-        # Construct a filename based on the URL or any other logic you prefer
-        filename = f"data_{idx}.html"
-        with open(download_path + filename, 'wb') as file:
-            file.write(response.content)
-        print(f"Downloaded: {url} to {filename}")
+# response = requests.get(URL, headers=headers)
 
-        # Introduce a delay before the next request
-        time.sleep(delay)
+# soup = BeautifulSoup(response.content, 'html.parser')
 
-if __name__ == "__main__":
-    sitemap_url = "https://www.tesco.com/groceries/sitemap/UK.en.pdp.sitemap.xml"  # replace with the actual sitemap URL
-    download_path = "./downloads/"  # make sure this directory exists
-    
-    urls = get_urls_from_sitemap(sitemap_url)
-    download_data_from_urls(urls, download_path)
+# # Let's assume each product is in a div with class 'product-item'
+# products = soup.find_all('div', class_='product-details--wrapper')
+
+# for product in products:
+#     # Extracting product name
+#     product_name = product.find('h2', class_='product-title--title').text
+
+#     # # Extracting product price
+#     # product_price = product.find('span', class_='product-price').text
+
+#     # # Extracting product description
+#     # product_description = product.find('p', class_='product-description').text
+
+#     print(f"Product Name: {product_name}")
+#     # print(f"Price: {product_price}")
+#     # print(f"Description: {product_description}\n")
+
